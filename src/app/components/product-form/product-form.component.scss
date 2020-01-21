@@ -1,0 +1,29 @@
+.card-vinho {
+  border: 1px solid;
+  padding: 0px;
+  margin-left: 10px;
+}
+
+.scroll-styles {
+  max-height: 751px;
+  overflow: overlay;
+  padding-right: 24px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #737373 !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #737373 !important;
+}
