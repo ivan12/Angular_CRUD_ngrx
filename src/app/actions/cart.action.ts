@@ -13,22 +13,20 @@ export namespace VinhosAction {
         REMOVE_EFFECT = 'REM'
     }
 
-    export const Add  = createAction(ActionTypes.ADD, props<{ payload : any }>());
+    export const add  = createAction(ActionTypes.ADD, props<{ payload : any }>());
 
-    export const Remove  = createAction(ActionTypes.REMOVE, props<{ payload : any }>());
+    export const remove  = createAction(ActionTypes.REMOVE, props<{ payload : any }>());
 
-    export const Edit  = createAction(ActionTypes.EDIT, props<{ payload : any }>());
+    export const edit  = createAction(ActionTypes.EDIT, props<{ payload : any }>());
 
     export const getVinhos  = createAction(ActionTypes.GET_VINHOS, props<{ payload : any }>());
 
+    export const addVinhosEffect  = createAction(ActionTypes.ADD_EFFECT, props<{ payload : any }>());
+
+    export const editVinhosEffect  = createAction(ActionTypes.EDIT_EFFECT, props<{ payload : any }>());
+
+    export const removeVinhosEffect  = createAction(ActionTypes.REMOVE_EFFECT, props<{ payload : any }>());
+
     export const loadVinhosEffect  = createAction(ActionTypes.LOAD_VINHOS_EFFECT, props<{ payload : any }>());
-
-    export const setVinhosEffect  = createAction(ActionTypes.SET_PRODUCTS_EFFECT, props<{ payload : any }>());
-
-    export const setProducts  = createAction(ActionTypes.SET_PRODUCT, props<{ payload : any }>());
-
-    export const LoadEdit  = createAction(ActionTypes.LOAD_EDIT, props<{ payload : any }>());
-
-    export const Clear  = createAction(ActionTypes.CLEAR, props<{ payload : any }>());
 
 }

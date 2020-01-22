@@ -1,11 +1,12 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CartModel } from 'src/app/models/cart.model';
-import { Observable } from 'rxjs';
-import {Edit} from "../../actions/cart.action";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {VinhoService} from "../../services/vinho.service";
-import { CartSelector } from "../../selectors/selector.product";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { VinhoService } from "../../services/vinho.service";
+import { VinhoSelector } from "../../selectors/selector.product";
+import { map } from "rxjs/operators";
+import {VinhosAction} from "../../actions/cart.action";
+import productEdit = VinhoSelector.productEdit;
 
 @Component({
   selector: 'app-product-form',
@@ -28,12 +29,13 @@ export class ProductFormComponent implements OnInit {
 
   async ngOnInit() {
     this.editando = false;
-
-    this.store.select(CartSelector.productEdit).subscribe((val) => {
-      console.log('store.select val = ', val);
-      this.productEdit = val;
-      this.setFormGroup(this.productEdit);
-    });
+    this.store.select(VinhoSelector.productEdit).pipe(
+            map(val => {
+              this.productEdit = val;
+              console.log('VinhoSelector productEdit = ', this.productEdit);
+              this.setFormGroup(this.productEdit);
+            })
+    );
   }
 
   setFormGroup(productEdit) {
@@ -69,10 +71,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   async edit() {
-    this.vinhoService.edit(this.todoForm.value).subscribe(res => {
-      console.log('edit() res = ', res);
-    });
-    this.store.dispatch(Edit(this.todoForm.value));
+    this.store.dispatch(VinhosAction.editVinhosEffect(this.todoForm.value));
     this.editando = false;
   }
 }

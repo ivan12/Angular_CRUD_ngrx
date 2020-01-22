@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { CartModel } from 'src/app/models/cart.model';
+import {VinhoSelector} from "../../selectors/selector.product";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-navbar',
@@ -9,10 +11,12 @@ import { CartModel } from 'src/app/models/cart.model';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  cart$: Observable<CartModel>;
+  products: any;
 
   constructor(private store: Store<CartModel>) {
-    this.cart$ = store.pipe(select('cart'));
+    store.select(VinhoSelector.products).pipe(map(res => {
+      this.products = res;
+    }));
   }
 
   ngOnInit() {

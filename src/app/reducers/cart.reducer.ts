@@ -5,12 +5,15 @@ export namespace VinhoReducer {
     const cart = { payload: undefined }
 
     const _setPro = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setAdd = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setEdit = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setRemove = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
 
     const _profissionalReduces = createReducer(cart,
         on(VinhosAction.getVinhos, _setPro),
-        on(VinhosAction.Add, _setPro),
-        on(VinhosAction.Edit, _setPro),
-        on(VinhosAction.Remove, _setPro),
+        on(VinhosAction.add, _setAdd),
+        on(VinhosAction.edit, _setEdit),
+        on(VinhosAction.remove, _setRemove),
     )
     export function reducer(state: any, action: Action) {
         return _profissionalReduces(state, action)

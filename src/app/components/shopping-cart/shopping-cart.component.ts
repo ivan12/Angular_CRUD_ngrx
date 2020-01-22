@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { Remove, Clear } from 'src/app/actions/cart.action';
 import { CartModel } from 'src/app/models/cart.model';
 import { AlertController } from '@ionic/angular';
+import {VinhosAction} from "../../actions/cart.action";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -21,11 +21,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   remove(item) {
-    this.store.dispatch(Remove(item));
+    this.store.dispatch(VinhosAction.remove(item));
   }
 
   reset() {
-    this.store.dispatch(Clear());
+    // this.store.dispatch(Clear());
   }
 
   ngOnInit() {

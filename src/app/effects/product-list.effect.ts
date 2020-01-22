@@ -20,7 +20,6 @@ export class ProductListEffects {
         exhaustMap(res => this.vinhoService.getProducts()
             .pipe(
                 map(products => {
-                    console.log('EFFECT GetProducts products = ', products);
                     VinhosAction.getVinhos({ payload: products});
                 })
             )
@@ -36,7 +35,7 @@ export class ProductListEffects {
             exhaustMap(product => this.vinhoService.edit(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.Edit(product)
+                        VinhosAction.Edit({ payload: product})
                     })
                 )
             )
@@ -52,7 +51,7 @@ export class ProductListEffects {
             exhaustMap(product => this.vinhoService.create(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.Add(product)
+                        VinhosAction.Add({ payload: product})
                     })
                 )
             )
@@ -68,7 +67,7 @@ export class ProductListEffects {
             exhaustMap(product => this.vinhoService.delete(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.Remove(product)
+                        VinhosAction.Remove({ payload: product})
                     })
                 )
             )
