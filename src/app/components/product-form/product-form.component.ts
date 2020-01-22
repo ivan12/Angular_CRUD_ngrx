@@ -6,7 +6,6 @@ import { VinhoService } from "../../services/vinho.service";
 import { VinhoSelector } from "../../selectors/selector.product";
 import { map } from "rxjs/operators";
 import {VinhosAction} from "../../actions/cart.action";
-import productEdit = VinhoSelector.productEdit;
 
 @Component({
   selector: 'app-product-form',
@@ -22,7 +21,6 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private store: Store<CartModel>,
     private formBuilder: FormBuilder,
-    private vinhoService: VinhoService
   ) {
     this.inicializarForm();
   }

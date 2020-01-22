@@ -35,7 +35,7 @@ export class ProductListEffects {
             exhaustMap(product => this.vinhoService.edit(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.Edit({ payload: product})
+                        VinhosAction.edit({ payload: product})
                     })
                 )
             )
@@ -51,7 +51,7 @@ export class ProductListEffects {
             exhaustMap(product => this.vinhoService.create(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.Add({ payload: product})
+                        VinhosAction.add({ payload: product})
                     })
                 )
             )
@@ -67,7 +67,7 @@ export class ProductListEffects {
             exhaustMap(product => this.vinhoService.delete(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.Remove({ payload: product})
+                        VinhosAction.remove({ payload: product})
                     })
                 )
             )
