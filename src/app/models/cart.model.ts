@@ -1,7 +1,7 @@
-import { ProductModel } from './product.model';
+import { ProductState } from './product.model';
 
 export class CartModel {
-    public products: ProductModel[] = [];
-    public productEdit: ProductModel = undefined;
+    public products: ProductState[] = [];
+    public productEdit: ProductState = undefined;
     public total: number = 0;
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,10 @@ import { Store, select } from '@ngrx/store';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  cart$: Observable<[]>;
+  total$: Observable<any>;
 
   constructor(private store: Store<{ cart: [] }>) {
-    this.cart$ = store.pipe(select('cart'));
+    this.total$ = store.select(VinhoSelector.total);
   }
 
 }

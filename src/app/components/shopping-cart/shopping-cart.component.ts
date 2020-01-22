@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { CartModel } from 'src/app/models/cart.model';
 import { AlertController } from '@ionic/angular';
-import {VinhosAction} from "../../actions/cart.action";
+import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
+import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
+import { CartState } from "../../_store/vinho-store.module";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,21 +13,20 @@ import {VinhosAction} from "../../actions/cart.action";
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
-  cart$: Observable<CartModel>;
+  cart$: Observable<CartState>;
 
   constructor(
     private store: Store<CartModel>,
     private alertCtrl: AlertController,
   ) {
-    this.cart$ = store.pipe(select('cart'));
+    this.cart$ = store.select(VinhoSelector.cart);
   }
 
   remove(item) {
-    this.store.dispatch(VinhosAction.remove(item));
+    this.store.dispatch(VinhosAction.remove({payload: item}));
   }
 
   reset() {
-    // this.store.dispatch(Clear());
   }
 
   ngOnInit() {

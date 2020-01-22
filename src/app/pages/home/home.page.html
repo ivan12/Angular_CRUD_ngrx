@@ -17,8 +17,8 @@
 <ion-footer>
   <ion-toolbar color="dark">
     <ion-buttons slot="end">
-      <ion-title>{{ (cart$ | async).total | currency: 'BRL' }}</ion-title>
-      <ion-button color="success" fill="solid" [disabled]="(cart$ | async).total <= 0">COMPRAR</ion-button>
+      <ion-title>{{ ((total$ | async) ? (total$ | async).total : 0) | currency: 'BRL' }}</ion-title>
+      <ion-button color="success" fill="solid" [disabled]="((total$ | async) ? (total$ | async).total : 0 ) <= 0">COMPRAR</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

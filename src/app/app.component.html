@@ -5,7 +5,7 @@
       <ion-list>
         <ion-item>
           <ion-label>Meu Carrinho</ion-label>
-          <ion-note slot="end" color="danger">{{ (cart$ | async).products.length }}</ion-note>
+          <ion-note slot="end" color="danger">{{ (listVinhos$ | async)?.length }}</ion-note>
         </ion-item>
       </ion-list>
     </ion-content>

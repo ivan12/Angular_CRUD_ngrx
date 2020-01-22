@@ -1,22 +1,27 @@
 import { createReducer, on, Action } from '@ngrx/store'
-import { VinhosAction } from '../actions/cart.action';
+import { VinhosAction } from './vinho.action';
+import {CartState, VinhoState} from "../../vinho-store.module";
 
 export namespace VinhoReducer {
-    const cart = { payload: undefined }
+    const cart: { total: number; productEdit: {}; products: any[] } = {
+        productEdit: {},
+        products: [],
+        total: 0
+    }
 
-    const _setPro = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
-    const _setAdd = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
-    const _setEdit = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
-    const _setRemove = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setPro = (state: CartState, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setAdd = (state: CartState, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setEdit = (state: CartState, action: Action): any => ({ ...state, payload: action['payload'] })
+    const _setRemove = (state: CartState, action: Action): any => ({ ...state, payload: action['payload'] })
 
-    const _profissionalReduces = createReducer(cart,
+    const _vinhoReduces = createReducer(cart,
         on(VinhosAction.getVinhos, _setPro),
         on(VinhosAction.add, _setAdd),
         on(VinhosAction.edit, _setEdit),
         on(VinhosAction.remove, _setRemove),
     )
     export function reducer(state: any, action: Action) {
-        return _profissionalReduces(state, action)
+        return _vinhoReduces(state, action)
     }
 }
 

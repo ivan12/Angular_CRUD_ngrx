@@ -1,4 +1,4 @@
-<div class="ion-padding custom-skeleton" *ngIf="!products">
+<div class="ion-padding custom-skeleton" *ngIf="!(products$ | async)">
   <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
   <ion-skeleton-text animated></ion-skeleton-text>
   <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
@@ -6,9 +6,9 @@
   <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
 </div>
 
-<ion-grid *ngIf="products">
+<ion-grid *ngIf="(products$ | async)">
   <ion-row class="col-8 col-md-7 col-lg-6" class="scroll-styles">
-    <ion-col size="3" *ngFor="let product of products">
+    <ion-col size="3" *ngFor="let product of (products$ | async)">
       <ion-card class="card-vinho">
         <ion-card-header>
           <ion-card-title class="title-vinho">{{ product.nome }}</ion-card-title>
@@ -17,7 +17,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          <img src="{{ product.foto }}" alt="">
+          <img src="{{ product.fotos[0] }}" alt="">
           {{ product.descricao }}
         </ion-card-content>
 

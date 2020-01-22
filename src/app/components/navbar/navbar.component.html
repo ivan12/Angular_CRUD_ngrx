@@ -9,7 +9,7 @@
         <ion-buttons slot="end">
             <ion-button>
                 <ion-icon slot="start" name="cart"></ion-icon>
-                <ion-badge color="danger">{{ products.length }}</ion-badge>
+                <ion-badge color="danger">{{ products ? products.length : 0 }}</ion-badge>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>

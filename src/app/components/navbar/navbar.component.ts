@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { CartModel } from 'src/app/models/cart.model';
-import {VinhoSelector} from "../../selectors/selector.product";
-import {map} from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
 
 @Component({
   selector: 'app-navbar',

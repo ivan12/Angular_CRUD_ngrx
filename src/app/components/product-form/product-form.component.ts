@@ -2,10 +2,9 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CartModel } from 'src/app/models/cart.model';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { VinhoService } from "../../services/vinho.service";
-import { VinhoSelector } from "../../selectors/selector.product";
 import { map } from "rxjs/operators";
-import {VinhosAction} from "../../actions/cart.action";
+import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
+import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
 
 @Component({
   selector: 'app-product-form',
@@ -69,7 +68,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   async edit() {
-    this.store.dispatch(VinhosAction.editVinhosEffect(this.todoForm.value));
+    this.store.dispatch(VinhosAction.editVinhosEffect({payload: this.todoForm.value}));
     this.editando = false;
   }
 }

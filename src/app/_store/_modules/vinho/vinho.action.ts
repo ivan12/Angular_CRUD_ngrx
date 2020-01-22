@@ -5,12 +5,12 @@ export namespace VinhosAction {
         ADD = 'ADD',
         EDIT = 'EDIT',
         REMOVE = 'REM',
-
         GET_VINHOS = 'GET_VINHOS',
+
         LOAD_VINHOS_EFFECT = 'GET_VINHOS_EFFECT',
-        ADD_EFFECT = 'ADD',
-        EDIT_EFFECT = 'EDIT',
-        REMOVE_EFFECT = 'REM'
+        ADD_EFFECT = 'ADD_EFFECT',
+        EDIT_EFFECT = 'EDIT_EFFECT',
+        REMOVE_EFFECT = 'REM_EFFECT'
     }
 
     export const add  = createAction(ActionTypes.ADD, props<{ payload : any }>());
