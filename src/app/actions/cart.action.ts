@@ -1,48 +1,34 @@
-import { Action } from '@ngrx/store';
-import {reduce} from "rxjs/operators";
+import {createAction, props} from '@ngrx/store';
 
-export enum ActionTypes {
-    Add = 'ADD',
-    Edit = 'EDIT',
-    Remove = 'REM',
-    Clear = 'CLE',
-    LoadEdit = 'LOAD_EDIT',
-    SetEdit = 'SET_EDIT',
-    SetProducts = 'SET_PRODUCTS',
-    GetProducts = 'GET_PRODUCTS'
-}
+export namespace VinhosAction {
+    export enum ActionTypes {
+        ADD = 'ADD',
+        EDIT = 'EDIT',
+        REMOVE = 'REM',
 
-export const Add = (product: any) => {
-    return <Action>{ type: ActionTypes.Add, payload: product };
-}
-
-export const Edit = (product: any) => {
-    return <Action>{ type: ActionTypes.Edit, payload: product };
-}
-
-export const Remove = (product: any) => {
-    return <Action>{ type: ActionTypes.Remove, payload: product };
-}
-
-export const setEdit = (product: any) => {
-    return <Action>{ type: ActionTypes.SetEdit, payload: product };
-}
-
-export class getProducts implements Action {
-    readonly type = ActionTypes.GetProducts;
-    constructor(public payload: any) {
-        console.log('Action getProducts payload = ', payload);
+        GET_VINHOS = 'GET_VINHOS',
+        LOAD_VINHOS_EFFECT = 'GET_VINHOS_EFFECT',
+        ADD_EFFECT = 'ADD',
+        EDIT_EFFECT = 'EDIT',
+        REMOVE_EFFECT = 'REM'
     }
-}
 
-export const setProducts = (products: any[]) => {
-    return <Action>{ type: ActionTypes.SetProducts, payload: products };
-}
+    export const Add  = createAction(ActionTypes.ADD, props<{ payload : any }>());
 
-export const LoadEdit = (product: any) => {
-    return <Action>{ type: ActionTypes.LoadEdit, payload: product };
-}
+    export const Remove  = createAction(ActionTypes.REMOVE, props<{ payload : any }>());
 
-export const Clear = () => {
-    return <Action>{ type: ActionTypes.Clear, payload: null };
+    export const Edit  = createAction(ActionTypes.EDIT, props<{ payload : any }>());
+
+    export const getVinhos  = createAction(ActionTypes.GET_VINHOS, props<{ payload : any }>());
+
+    export const loadVinhosEffect  = createAction(ActionTypes.LOAD_VINHOS_EFFECT, props<{ payload : any }>());
+
+    export const setVinhosEffect  = createAction(ActionTypes.SET_PRODUCTS_EFFECT, props<{ payload : any }>());
+
+    export const setProducts  = createAction(ActionTypes.SET_PRODUCT, props<{ payload : any }>());
+
+    export const LoadEdit  = createAction(ActionTypes.LOAD_EDIT, props<{ payload : any }>());
+
+    export const Clear  = createAction(ActionTypes.CLEAR, props<{ payload : any }>());
+
 }

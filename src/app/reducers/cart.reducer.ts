@@ -1,6 +1,26 @@
-import { ActionTypes } from '../actions/cart.action';
+import { createReducer, on, Action } from '@ngrx/store'
+import { VinhosAction } from '../actions/cart.action';
+
+export namespace VinhoReducer {
+    const cart = { payload: undefined }
+
+    const _setPro = (state: any, action: Action): any => ({ ...state, payload: action['payload'] })
+
+    const _profissionalReduces = createReducer(cart,
+        on(VinhosAction.getVinhos, _setPro),
+        on(VinhosAction.Add, _setPro),
+        on(VinhosAction.Edit, _setPro),
+        on(VinhosAction.Remove, _setPro),
+    )
+    export function reducer(state: any, action: Action) {
+        return _profissionalReduces(state, action)
+    }
+}
+
+/*
+import { VinhosAction } from '../actions/cart.action';
 import { ActionModel } from '../models/action.model';
-import { ProductModel } from '../models/product.model';
+import { ProductState } from '../models/product.model';
 import {CartModel} from "../models/cart.model";
 
 export let cart = {
@@ -92,3 +112,4 @@ function calculateTotal(products: ProductModel[]): number {
     });
     return total;
 }
+*/

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductModel } from '../models/product.model';
+import { ProductState } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class VinhoService {
   ) { }
 
   getProducts() {
-    return this.http.get<ProductModel[]>(`${this.url}/listaTodos`);
+    return this.http.get<ProductState[]>(`${this.url}/listaTodos`);
   }
 
   create(vinho: any) {

@@ -1,4 +1,4 @@
-export class ProductModel {
+export class ProductState {
     public id: string;
     public nome: string;
     public safra: string;

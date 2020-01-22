@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Add, getProducts, LoadEdit } from 'src/app/actions/cart.action';
 import { ToastController } from '@ionic/angular';
 import { CartModel } from "../../models/cart.model";
+import {VinhosAction} from "../../actions/cart.action";
 
 @Component({
   selector: 'app-product-list',
@@ -18,11 +18,11 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new getProducts(this.products))
+    this.loadEdit()
   }
 
-  async loadEdit(product) {
-    this.store.dispatch(LoadEdit(product));
+  loadEdit() {
+    new VinhosAction.ActionTypes.LOAD_VINHOS_EFFECT;
   }
 
   async add(product) {
