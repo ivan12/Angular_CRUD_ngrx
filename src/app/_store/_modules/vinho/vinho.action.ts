@@ -2,22 +2,20 @@ import {createAction, props} from '@ngrx/store';
 
 export namespace VinhosAction {
     export enum ActionTypes {
-        ADD = 'ADD',
+        ADD                   = 'ADD',
         ADD_VINHO_MY_PRODUCTS = 'ADD_VINHO_MY_PRODUCTS',
-        EDIT = 'EDIT',
-        SET_VINHOS = 'SET_VINHOS',
-        ADD_TOTAL = 'ADD_TOTAL',
-        REDUCE_TOTAL = 'REDUCE_TOTAL',
-        CLEAR_TOTAL = 'CLEAR_TOTAL',
-        REMOVE = 'REM',
-        REMOVE_ALL = 'REMOVE_ALL',
-
-        LOAD_VINHOS_EFFECT = 'GET_VINHOS_EFFECT',
-        ADD_EFFECT = 'ADD_EFFECT',
-        EDIT_EFFECT = 'EDIT_EFFECT',
-        REMOVE_EFFECT = 'REM_EFFECT',
-
-        CLEAR_EDIT = 'CLEAR_EDIT'
+        EDIT                  = 'EDIT',
+        SET_VINHOS            = 'SET_VINHOS',
+        ADD_TOTAL             = 'ADD_TOTAL',
+        REDUCE_TOTAL          = 'REDUCE_TOTAL',
+        CLEAR_TOTAL           = 'CLEAR_TOTAL',
+        REMOVE                = 'REM',
+        REMOVE_ALL            = 'REMOVE_ALL',
+        LOAD_VINHOS_EFFECT    = 'GET_VINHOS_EFFECT',
+        ADD_EFFECT            = 'ADD_EFFECT',
+        EDIT_EFFECT           = 'EDIT_EFFECT',
+        REMOVE_EFFECT         = 'REM_EFFECT',
+        CLEAR_EDIT            = 'CLEAR_EDIT'
     }
 
     // Todo Actions Reduce
