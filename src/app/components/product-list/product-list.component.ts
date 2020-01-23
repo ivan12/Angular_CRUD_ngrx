@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ToastController } from '@ionic/angular';
-import { CartModel } from "../../models/cart.model";
 import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
 import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
-import { VinhoState } from "../../_store/vinho-store.module";
+import {CartState, VinhoState} from "../../_store/vinho-store.module";
 import { Observable } from "rxjs";
 
 @Component({
@@ -12,11 +11,12 @@ import { Observable } from "rxjs";
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
+@Injectable()
 export class ProductListComponent implements OnInit {
   public products$: Observable<VinhoState[]> = null;
 
   constructor(
-    private store: Store<CartModel>,
+    private store: Store<CartState>,
     private toastCtrl: ToastController
   ) { }
 
@@ -29,9 +29,17 @@ export class ProductListComponent implements OnInit {
   }
 
   async add(product) {
-    this.store.dispatch(VinhosAction.addVinhosEffect({payload: product}));
+    this.store.dispatch(VinhosAction.addVinhoMyProducts({payload: product}));
+    this.store.dispatch(VinhosAction.addTotal({payload: product.preco}));
+  }
+
+  loadEdit(product) {
+    this.store.dispatch(VinhosAction.edit({payload: product}));
+  }
+
+  async toast(msg) {
     const toast = await this.toastCtrl.create({
-      message: `Vinho "${product.nome}" adicionado a sua adega pessoal`,
+      message: msg,
       duration: 2000,
       showCloseButton: true,
       closeButtonText: "Fechar"

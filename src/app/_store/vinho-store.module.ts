@@ -10,7 +10,7 @@ export interface VinhoState {
     id: string
     nome    : string
     safra   : string
-    quantidade: number
+    quantidade: string
     fotos: []
     preco: number
     descricao: string
@@ -20,6 +20,7 @@ export interface VinhoState {
 export interface CartState {
     productEdit: VinhoState
     products: VinhoState[],
+    myProducts: VinhoState[],
     total: number
 }
 
@@ -34,7 +35,7 @@ export const reducers: ActionReducerMap<TryState> = {
 export const metaReducers: MetaReducer<TryState>[] = !environment.production ? [] : [];
 
 const CONFIG_STORE_MODULE = {
-    metaReducers,
+    metaReducers: [],
     runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true

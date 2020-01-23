@@ -7,5 +7,6 @@ export namespace VinhoSelector {
     export const cart = createSelector(cartState, (state) => state);
     export const productEdit = createSelector(cartState, (state) => state.productEdit);
     export const products = createSelector(cartState, (state) => state.products);
+    export const myProducts = createSelector(cartState, (state) => state.myProducts);
     export const total = createSelector(cartState, (state) => state.total);
 }

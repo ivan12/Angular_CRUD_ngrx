@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Actions, createEffect, Effect, ofType} from "@ngrx/effects";
-import {catchError, exhaustMap, map} from "rxjs/operators";
-import {VinhoService} from "./vinho.service";
-import {VinhosAction} from "./vinho.action";
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, Effect, ofType } from "@ngrx/effects";
+import {catchError, exhaustMap, map, switchMap} from "rxjs/operators";
+import { VinhoService } from "./vinho.service";
+import { VinhosAction } from "./vinho.action";
 
 @Injectable()
 export class VinhoEffects {
@@ -11,20 +11,19 @@ export class VinhoEffects {
         private vinhoService: VinhoService,
     ) { }
 
-    @Effect()
     getProductsEffect$ = createEffect(() =>
-    this.actions$.pipe(
-        ofType(VinhosAction.loadVinhosEffect),
-        map(action => action['payload']),
-        catchError(error => error),
-        exhaustMap(res => this.vinhoService.getProducts()
-            .pipe(
-                map(products => VinhosAction.getVinhos({ payload: products}))
-            )
+        this.actions$.pipe(
+            ofType(VinhosAction.loadVinhosEffect),
+            map(action => action['payload']),
+            // catchError(error => error),
+            exhaustMap(res => this.vinhoService.getProducts()),
+            map(products => {
+                console.log('getProductsEffect$ products = ', products);
+                return VinhosAction.setVinhos({ payload: products})
+            })
         ),
-    ));
+    );
 
-    @Effect()
     edit$ = createEffect(() =>
         this.actions$.pipe(
             ofType(VinhosAction.editVinhosEffect),
@@ -38,7 +37,6 @@ export class VinhoEffects {
         )
     );
 
-    @Effect()
     add$ = createEffect(() =>
         this.actions$.pipe(
             ofType(VinhosAction.addVinhosEffect),
@@ -52,7 +50,6 @@ export class VinhoEffects {
         )
     );
 
-    @Effect()
     remove$ = createEffect(() =>
         this.actions$.pipe(
             ofType(VinhosAction.removeVinhosEffect),

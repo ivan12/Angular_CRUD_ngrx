@@ -1,10 +1,10 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CartModel } from 'src/app/models/cart.model';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { map } from "rxjs/operators";
 import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
 import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
+import { CartState, VinhoState } from "../../_store/vinho-store.module";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-product-form',
@@ -13,45 +13,18 @@ import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
 })
 @Injectable()
 export class ProductFormComponent implements OnInit {
-  editando: boolean = false;
   todoForm: FormGroup;
-  productEdit = undefined;
+  productEdit$: Observable<VinhoState> = undefined;
 
   constructor(
-    private store: Store<CartModel>,
+    private store: Store<CartState>,
     private formBuilder: FormBuilder,
   ) {
     this.inicializarForm();
   }
 
   async ngOnInit() {
-    this.editando = false;
-    this.store.select(VinhoSelector.productEdit).pipe(
-            map(val => {
-              this.productEdit = val;
-              console.log('VinhoSelector productEdit = ', this.productEdit);
-              this.setFormGroup(this.productEdit);
-            })
-    );
-  }
-
-  setFormGroup(productEdit) {
-    if (productEdit) {
-      this.todoForm.patchValue({
-        id: productEdit.id,
-        nome: productEdit.nome,
-        descricao: productEdit.descricao,
-        fotos: productEdit.fotos,
-        pais: productEdit.pais,
-        preco: productEdit.preco,
-        quantidade: productEdit.quantidade,
-        safra: productEdit.safra,
-      });
-      this.editando = true;
-      return true;
-    } else {
-      return false;
-    }
+    this.productEdit$ = this.store.select(VinhoSelector.productEdit);
   }
 
   inicializarForm() {
@@ -67,8 +40,8 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  async edit() {
-    this.store.dispatch(VinhosAction.editVinhosEffect({payload: this.todoForm.value}));
-    this.editando = false;
+  async edit(productEdit) {
+    this.store.dispatch(VinhosAction.editVinhosEffect({payload: productEdit}));
+    this.store.dispatch(VinhosAction.clearEdit({payload: null}));
   }
 }
