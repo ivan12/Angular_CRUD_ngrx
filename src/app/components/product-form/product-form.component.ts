@@ -40,8 +40,23 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
+  mountObjEditProduct(productEdit) {
+    let objTemp = {
+      descricao: this.todoForm.value.descricao,
+      fotos: productEdit.fotos,
+      id: productEdit.id,
+      nome: this.todoForm.value.nome,
+      pais: productEdit.pais,
+      preco: productEdit.preco,
+      quantidade: productEdit.quantidade,
+      safra: productEdit.safra,
+    }
+    return objTemp;
+  }
+
+
   async edit(productEdit) {
-    this.store.dispatch(VinhosAction.editVinhosEffect({payload: productEdit}));
+    this.store.dispatch(VinhosAction.editVinhosEffect({payload: this.mountObjEditProduct(productEdit)}));
     this.store.dispatch(VinhosAction.clearEdit({payload: null}));
   }
 }

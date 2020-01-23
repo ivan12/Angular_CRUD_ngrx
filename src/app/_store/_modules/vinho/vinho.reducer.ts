@@ -10,7 +10,6 @@ export namespace VinhoReducer {
     }
 
     const _setPro = (state: any, action: Action) => ({ ...state, products: action['payload']})
-    const _setAdd = (state: any, action: Action) => ({ ...state, myProducts: action['payload'] })
     const _addVinhoMyProducts = (state: any, action: Action) => ({ ...state, myProducts: state.myProducts.concat({...action['payload']}) })
     const _setEdit = (state: any, action: Action) => ({ ...state, productEdit: action['payload'] })
     const _setRemove = (state: any, action: Action) => ({ ...state, myProducts: state.myProducts.filter(myProduct => myProduct != action['payload'])})
@@ -24,7 +23,6 @@ export namespace VinhoReducer {
 
     const _vinhoReduces = createReducer(cart,
         on(VinhosAction.setVinhos, _setPro),
-        on(VinhosAction.add, _setAdd),
         on(VinhosAction.edit, _setEdit),
         on(VinhosAction.remove, _setRemove),
         on(VinhosAction.removeAll, _setRemoveAll),

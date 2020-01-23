@@ -31,7 +31,10 @@ export class VinhoEffects {
             catchError(error => error),
             exhaustMap(product => this.vinhoService.edit(product)
                 .pipe(
-                    map(product => VinhosAction.edit({ payload: product}))
+                    map(product => {
+                        VinhosAction.edit({ payload: product})
+                        return VinhosAction.loadVinhosEffect({ payload: null})
+                    })
                 )
             )
         )
