@@ -11,11 +11,12 @@ export namespace VinhosAction {
         CLEAR_TOTAL           = 'CLEAR_TOTAL',
         REMOVE                = 'REM',
         REMOVE_ALL            = 'REMOVE_ALL',
+        CLEAR_EDIT            = 'CLEAR_EDIT',
+
         LOAD_VINHOS_EFFECT    = 'GET_VINHOS_EFFECT',
         ADD_EFFECT            = 'ADD_EFFECT',
         EDIT_EFFECT           = 'EDIT_EFFECT',
-        REMOVE_EFFECT         = 'REM_EFFECT',
-        CLEAR_EDIT            = 'CLEAR_EDIT'
+        REMOVE_EFFECT         = 'REM_EFFECT'
     }
 
     // Todo Actions Reduce

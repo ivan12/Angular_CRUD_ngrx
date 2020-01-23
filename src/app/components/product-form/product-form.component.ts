@@ -54,9 +54,12 @@ export class ProductFormComponent implements OnInit {
     return objTemp;
   }
 
-
   async edit(productEdit) {
     this.store.dispatch(VinhosAction.editVinhosEffect({payload: this.mountObjEditProduct(productEdit)}));
+    this.clearEdit();
+  }
+
+  clearEdit() {
     this.store.dispatch(VinhosAction.clearEdit({payload: null}));
   }
 }

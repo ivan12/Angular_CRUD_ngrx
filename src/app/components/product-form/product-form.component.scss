@@ -27,3 +27,23 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #737373 !important;
 }
+
+.bg-color-orange {
+  background-color: darkorange;
+}
+
+.bgImput {
+  background-color: #a1a3a7;
+  color: black;
+  font-weight: bolder;
+  margin-top: 6px;
+}
+
+.eye-disable {
+  position: absolute;
+  float: right !important;
+  margin-left: 93%;
+  margin-top: 4px;
+  background: darkred;
+  border-radius: 150px;
+}

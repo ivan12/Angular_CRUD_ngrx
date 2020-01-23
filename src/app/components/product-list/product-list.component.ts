@@ -37,6 +37,12 @@ export class ProductListComponent implements OnInit {
     this.store.dispatch(VinhosAction.edit({payload: product}));
   }
 
+  setIndisponivel(product) {
+    let objTemp = {...product};
+    objTemp.visivel = 'false';
+    this.store.dispatch(VinhosAction.editVinhosEffect({payload: objTemp}));
+  }
+
   async toast(msg) {
     const toast = await this.toastCtrl.create({
       message: msg,

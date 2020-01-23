@@ -6,7 +6,8 @@
 
 .title-vinho {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  max-width: 225px;
 }
 
 .scroll-styles {
@@ -21,6 +22,15 @@
 
 .bg-color-orange {
   background-color: darkorange;
+}
+
+.eye-disable {
+  position: absolute;
+  float: right !important;
+  margin-left: 78%;
+  margin-top: -11px;
+  background: darkred;
+  border-radius: 150px;
 }
 
 ::-webkit-scrollbar {

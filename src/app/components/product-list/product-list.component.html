@@ -11,7 +11,12 @@
     <ion-col size="3" *ngFor="let product of (products$ | async)">
       <ion-card class="card-vinho">
         <ion-card-header>
-          <ion-card-title class="title-vinho">{{ product.nome }}</ion-card-title>
+          <ion-item href="#" class="bg-color-red eye-disable" (click)="setIndisponivel(product)">
+            <ion-icon name="eye-off" slot="start"></ion-icon>
+          </ion-item>
+          <ion-card-title class="title-vinho">
+              {{ product.nome }}
+          </ion-card-title>
           <ion-img [src]="product.fotos[0]"></ion-img>
           <h3>{{ product.preco | currency: 'BRL' }}</h3>
         </ion-card-header>
