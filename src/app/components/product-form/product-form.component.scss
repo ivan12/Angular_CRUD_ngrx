@@ -1,5 +1,5 @@
 .card-vinho {
-  border: 1px solid;
+  border: 2px dotted;
   padding: 0px;
   margin-left: 10px;
 }
@@ -29,7 +29,21 @@
 }
 
 .bg-color-orange {
-  background-color: darkorange;
+  background: none;
+  padding: 3px;
+  margin-left: 16px;
+  margin-right: 15px;
+  margin-bottom: 14px;
+  border: 4px dashed #A84800;
+}
+
+.bg-color-orange:hover {
+  background: #A84800;
+  padding: 3px;
+  margin-left: 16px;
+  margin-right: 15px;
+  margin-bottom: 14px;
+  border: 4px dashed #fff;
 }
 
 .bgImput {

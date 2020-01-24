@@ -17,11 +17,32 @@
 }
 
 .bg-color-green {
-  background-color: darkgreen;
+  background: none;
+  padding: 3px;
+  margin: 5px;
+  border: 4px dashed darkgreen;
 }
 
+.bg-color-green:hover {
+  background: darkgreen;
+  padding: 3px;
+  margin: 5px;
+  border: 4px dashed #fff;
+}
+
+
 .bg-color-orange {
-  background-color: darkorange;
+  background: none;
+  padding: 3px;
+  margin: 5px;
+  border: 4px dashed #A84800;
+}
+
+.bg-color-orange:hover {
+  background: #A84800;
+  padding: 3px;
+  margin: 5px;
+  border: 4px dashed #fff;
 }
 
 .eye-disable {
