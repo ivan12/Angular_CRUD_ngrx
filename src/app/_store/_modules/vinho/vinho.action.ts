@@ -16,7 +16,8 @@ export namespace VinhosAction {
         LOAD_VINHOS_EFFECT    = 'GET_VINHOS_EFFECT',
         ADD_EFFECT            = 'ADD_EFFECT',
         EDIT_EFFECT           = 'EDIT_EFFECT',
-        REMOVE_EFFECT         = 'REM_EFFECT'
+        REMOVE_EFFECT         = 'REM_EFFECT',
+        DESATIVAR_EFFECT      = 'DESATIVAR_EFFECT'
     }
 
     // Todo Actions Reduce
@@ -51,5 +52,7 @@ export namespace VinhosAction {
     export const removeVinhosEffect  = createAction(ActionTypes.REMOVE_EFFECT, props<{ payload : any }>());
 
     export const addVinhoMyProducts  = createAction(ActionTypes.ADD_VINHO_MY_PRODUCTS, props<{ payload : any }>());
+
+    export const desativarVinhoEffect  = createAction(ActionTypes.DESATIVAR_EFFECT, props<{ payload : any }>());
 
 }

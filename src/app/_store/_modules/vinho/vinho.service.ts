@@ -32,7 +32,7 @@ export class VinhoService {
   };
 
   desativar(vinho: any) {
-    return this.http.post(this.url + '/delete', vinho);
+    return this.http.post(this.url + '/desativar', vinho);
   };
 
   delete(vinho: any) {

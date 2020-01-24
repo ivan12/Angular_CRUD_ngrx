@@ -53,14 +53,14 @@ export class VinhoEffects {
         )
     );
 
-    remove$ = createEffect(() =>
+    desativar$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VinhosAction.removeVinhosEffect),
+            ofType(VinhosAction.desativarVinhoEffect),
             map(action => action['payload']),
             catchError(error => error),
-            exhaustMap(product => this.vinhoService.delete(product)
+            exhaustMap(product => this.vinhoService.desativar(product)
                 .pipe(
-                    map(product => VinhosAction.remove({ payload: product}))
+                    map(product => VinhosAction.loadVinhosEffect({ payload: null}))
                 )
             )
         )
