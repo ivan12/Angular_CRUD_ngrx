@@ -22,6 +22,18 @@ export class HomePage {
     this.products$ = store.select(VinhoSelector.products);
   }
 
+  showTotalProdutosLoja(products) {
+    if (products) {
+      if (products.length < 10) {
+        return '0' + products.length;
+      } else {
+        return products.length;
+      }
+    } else {
+      return 0;
+    }
+  }
+
   comprar() {
     this.store.dispatch(VinhosAction.removeAll({payload: null}));
     this.store.dispatch(VinhosAction.clearTotal({payload: null}));
