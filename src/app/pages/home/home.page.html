@@ -14,8 +14,11 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="footer">
   <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-title>Vinhos na Loja: {{ ((products$ | async) ? (products$ | async).length : 0) }}</ion-title>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-title>{{ ((total$ | async) ? (total$ | async) : 0) | currency: 'BRL' }}</ion-title>
       <ion-button color="success" fill="solid" [disabled]="((total$ | async) ? (total$ | async) : 0 ) <= 0" (click)="comprar()">COMPRAR</ion-button>

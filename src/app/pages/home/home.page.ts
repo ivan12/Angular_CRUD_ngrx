@@ -12,12 +12,14 @@ import {ToastController} from "@ionic/angular";
 })
 export class HomePage {
   total$: Observable<any>;
+  products$: Observable<any>;
 
   constructor(
       private store: Store<{ cart: [] }>,
       private toastCtrl: ToastController)
   {
     this.total$ = store.select(VinhoSelector.total);
+    this.products$ = store.select(VinhoSelector.products);
   }
 
   comprar() {
