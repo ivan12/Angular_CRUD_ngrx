@@ -39,12 +39,14 @@ export class ProductListComponent implements OnInit {
 
   setIndisponivel(product) {
     this.store.dispatch(VinhosAction.desativarVinhoEffect({payload: product}));
+    this.toast('Vinho excluído com sucesso!');
   }
 
   async toast(msg) {
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 2000,
+      cssClass: "toast-red",
       showCloseButton: true,
       closeButtonText: "Fechar"
     });

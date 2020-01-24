@@ -1,7 +1,7 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import { Component, Injectable, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
 import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
 import { CartState } from "../../_store/vinho-store.module";
@@ -18,6 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   constructor(
     private store: Store<CartState>,
     private alertCtrl: AlertController,
+    private toastCtrl: ToastController
   ) {
     this.cart$ = store.select(VinhoSelector.cart);
   }
@@ -33,6 +34,16 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async toast(msg) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      showCloseButton: true,
+      closeButtonText: "Fechar"
+    });
+    toast.present();
   }
 
   async presentRemoveConfirm(item) {
@@ -51,7 +62,6 @@ export class ShoppingCartComponent implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 }
