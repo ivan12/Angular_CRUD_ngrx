@@ -1,9 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { CartState, VinhoState } from './_store/vinho-store.module';
-import { CartAction } from './_store/_modules/cart/cart.action';
-import { CartSelector } from './_store/_modules/cart/cart.selector';
+import {StoreVinhoState, VinhoState} from "./_store/vinho-store.module";
+import {StoreVinhoAction} from "./_store/_modules/storeVinho/storeVinho.action";
+import {StoreVinhoSelector} from "./_store/_modules/storeVinho/storeVinho.selector";
 
 @Component({
   selector: 'app-root',
@@ -12,16 +12,14 @@ import { CartSelector } from './_store/_modules/cart/cart.selector';
 @Injectable()
 export class AppComponent implements OnInit {
   listVinhos$: Observable<VinhoState[]>;
-  cart: CartState;
-  store: Store<CartState>;
+  storeVinho: Store<StoreVinhoState>;
 
-  constructor(private storeCart: Store<CartState>) {
-    this.store = storeCart;
+  constructor(private store: Store<StoreVinhoState>) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(CartAction.loadVinhosEffect({payload: this.cart}));
-    this.listVinhos$ = this.store.select(CartSelector.myProducts);
+    this.store.dispatch(StoreVinhoAction.loadVinhosEffect({payload: this.storeVinho}));
+    this.listVinhos$ = this.store.select(StoreVinhoSelector.products);
   }
 
   countMyProducts(products) {

@@ -2,56 +2,52 @@ import { createReducer, on, Action } from '@ngrx/store'
 import {CartAction} from "./cart.action";
 
 export namespace CartReducer {
-    const cart: { total: number; productEdit: {}; products: any[], myProducts: any[] } = {
-        productEdit: undefined,
-        products: [],
-        myProducts: [],
-        total: 0
+    const cart: { items: any[], totalPrice: number } = {
+        items: [],
+        totalPrice: 0
     }
 
-    const _setPro = (state: any, action: Action) => ({ ...state, products: action['payload']});
-    const _addVinhoMyProducts = (state: any, action: Action) => ({ ...state, myProducts: state.myProducts.concat(action['payload']) });
-    const _setVinhoMyProducts = (state: any, action: Action) => ({ ...state, myProducts: action['payload']});
-    const _setEdit = (state: any, action: Action) => ({ ...state, productEdit: action['payload'] });
-    const _setRemove = (state: any, action: Action) => ({ ...state, myProducts: state.myProducts.filter(myProduct => myProduct != action['payload'])});
-    const _setRemoveAll = (state: any, action: Action) => ({ ...state, myProducts: []});
+    const _addVinhoMyProducts = (state: any, action: Action) => ({ ...state, items: state.items.concat(action['payload']) });
+    const _setVinhoMyProducts = (state: any, action: Action) => ({ ...state, items: action['payload']});
 
-    const _setAddtotal = (state: any, action: Action) => ({ ...state, total: (state.total + action['payload'])});
-    const _setReduceTotal = (state: any, action: Action) => ({ ...state,  total: (state.total - action['payload'])});
+    const _setRemove = (state: any, action: Action) => ({ ...state, items: state.items.filter(myProduct => myProduct != action['payload'])});
+    const _setRemoveAll = (state: any, action: Action) => ({ ...state, items: []});
 
-    const _setClearTotal = (state: any, action: Action) => ({ ...state,  total: 0 });
-    const _clearEdit = (state: any, action: Action) => ({ ...state, productEdit: undefined });
+    const _setAddtotal = (state: any, action: Action) => ({ ...state, totalPrice: (state.totalPrice + action['payload'])});
+    const _setReduceTotal = (state: any, action: Action) => ({ ...state,  totalPrice: (state.totalPrice - action['payload'])});
 
-    const _addQuantidadeCarrinhoProduct = (state: any, action: Action) => ({ ...state, myProducts: _setQuantidadeCarrinho([].concat(...action['payload']), action['product'], 'add')});
-    const _reduceQuantidadeCarrinhoProduct = (state: any, action: Action) => ({ ...state, myProducts: _setQuantidadeCarrinho([].concat(...action['payload']), action['product'], 'reduce')});
+    const _setClearTotal = (state: any, action: Action) => ({ ...state,  totalPrice: 0 });
 
-    function _setQuantidadeCarrinho(list, product, type) {
-        let listTemp = [...list];
-        let indexElem = _indexById(listTemp, product);
-        if (listTemp[indexElem]) {
-            let productTemp = {...listTemp[indexElem]};
+    const _addQuantidadeCarrinhoProduct = (state: any, action: Action) => ({ ...state, items: _setQuantidadeCarrinho([].concat(...action['payload']), action['index'], 'add')});
+    const _reduceQuantidadeCarrinhoProduct = (state: any, action: Action) => ({ ...state, items: _setQuantidadeCarrinho([].concat(...action['payload']), action['index'], 'reduce')});
+
+    function _setQuantidadeCarrinho(list, index, type) {
+        let listTemp = [].concat(list);
+        let productTemp = listTemp[index];
+        if (productTemp) {
+            let productTempOtherReference = {...productTemp};
             if (type == 'add') {
-                productTemp.quantidadeCarrinho++;
+                productTempOtherReference.quantidadeCarrinho++;
             } else {
-                productTemp.quantidadeCarrinho--;
+                productTempOtherReference.quantidadeCarrinho--;
             }
-            listTemp[indexElem] = productTemp;
+            listTemp[index] = productTempOtherReference;
         }
         return listTemp;
     }
 
-    function _indexById(list, item) {
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].id == item.id) {
-                return i;
-            }
+    function _atualizaItems(listMyProducts, index, product) {
+        let listTemp = [...listMyProducts];
+        let myProductTemp = listTemp[index];
+        if (myProductTemp) {
+            let productTempOtherReference = {...product};
+            productTempOtherReference.quantidadeCarrinho =  myProductTemp.quantidadeCarrinho;
+            listTemp[index] = productTempOtherReference;
         }
-        return -1;
+        return listTemp;
     }
 
     const _vinhoReduces = createReducer(cart,
-        on(CartAction.setVinhos, _setPro),
-        on(CartAction.edit, _setEdit),
         on(CartAction.remove, _setRemove),
         on(CartAction.removeAll, _setRemoveAll),
         on(CartAction.addVinhoMyProducts, _addVinhoMyProducts),
@@ -61,9 +57,7 @@ export namespace CartReducer {
 
         on(CartAction.addTotal, _setAddtotal),
         on(CartAction.reduceTotal, _setReduceTotal),
-        on(CartAction.clearTotal, _setClearTotal),
-
-        on(CartAction.clearEdit, _clearEdit),
+        on(CartAction.clearTotal, _setClearTotal)
     )
     export function reducer(state: any, action: Action) {
         return _vinhoReduces(state, action);

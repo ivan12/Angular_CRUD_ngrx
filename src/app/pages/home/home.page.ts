@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { ToastController } from '@ionic/angular';
 import { CartSelector } from '../../_store/_modules/cart/cart.selector';
 import { CartAction } from '../../_store/_modules/cart/cart.action';
+import { StoreVinhoSelector } from "../../_store/_modules/storeVinho/storeVinho.selector";
+import {StoreVinhoAction} from "../../_store/_modules/storeVinho/storeVinho.action";
 
 @Component({
   selector: 'app-home',
@@ -18,8 +20,8 @@ export class HomePage {
       private store: Store<{ cart: [] }>,
       private toastCtrl: ToastController)
   {
-    this.total$ = store.select(CartSelector.total);
-    this.products$ = store.select(CartSelector.products);
+    this.total$ = store.select(CartSelector.totalPrice);
+    this.products$ = store.select(StoreVinhoSelector.products);
   }
 
   showTotalProdutosLoja(products) {

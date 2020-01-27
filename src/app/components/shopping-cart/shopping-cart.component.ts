@@ -19,7 +19,7 @@ export class ShoppingCartComponent {
     private store: Store<CartState>,
     private alertCtrl: AlertController,
   ) {
-    this.myProducts$ = store.select(CartSelector.myProducts);
+    this.myProducts$ = store.select(CartSelector.items);
   }
 
   remove(myProduct) {
@@ -28,13 +28,13 @@ export class ShoppingCartComponent {
   }
 
   addQuantidadeCarrinho(list, product) {
-     this.store.dispatch(CartAction.addQuantidadeCarrinhoProduct({ payload: list, product: product }));
+     this.store.dispatch(CartAction.addQuantidadeCarrinhoProduct({ payload: list, index: list.indexOf(product) }));
     this.store.dispatch(CartAction.addTotal({payload: product.preco}));
   }
 
   reduceQuantidadeCarrinho(list, product) {
     if (product.quantidadeCarrinho > 1) {
-      this.store.dispatch(CartAction.reduceQuantidadeCarrinhoProduct({ payload: list, product: product }));
+      this.store.dispatch(CartAction.reduceQuantidadeCarrinhoProduct({ payload: list, index: list.indexOf(product) }));
       this.store.dispatch(CartAction.reduceTotal({payload: product.preco}));
     }
   }

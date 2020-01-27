@@ -14,7 +14,7 @@ export class NavbarComponent {
   myProducts$: Observable<VinhoState[]> = undefined;
 
   constructor(private store: Store<CartState>) {
-    this.myProducts$ = store.select(CartSelector.myProducts);
+    this.myProducts$ = store.select(CartSelector.items);
   }
 
   countMyProducts(products) {

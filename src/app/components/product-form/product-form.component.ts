@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { CartState, VinhoState } from '../../_store/vinho-store.module';
-import { CartAction } from '../../_store/_modules/cart/cart.action';
-import { CartSelector } from '../../_store/_modules/cart/cart.selector';
+import {StoreVinhoAction} from "../../_store/_modules/storeVinho/storeVinho.action";
+import {StoreVinhoSelector} from "../../_store/_modules/storeVinho/storeVinho.selector";
 
 @Component({
   selector: 'app-product-form',
@@ -25,7 +25,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.productEdit$ = this.store.select(CartSelector.productEdit);
+    this.productEdit$ = this.store.select(StoreVinhoSelector.productEdit);
 
     this.productEdit$.pipe(
         map(productEdit => {
@@ -54,11 +54,11 @@ export class ProductFormComponent implements OnInit {
   }
 
   async edit(productEdit) {
-    this.store.dispatch(CartAction.editVinhosEffect({payload: productEdit}));
+    this.store.dispatch(StoreVinhoAction.editVinhosEffect({payload: productEdit}));
     this.clearEdit();
   }
 
   clearEdit() {
-    this.store.dispatch(CartAction.clearEdit({ payload: null }));
+    this.store.dispatch(StoreVinhoAction.clearEdit({ payload: null }));
   }
 }

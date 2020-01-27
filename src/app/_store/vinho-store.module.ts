@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
-import { VinhoReducer } from './_modules/vinho/vinho.reducer';
-import { VinhoEffects } from './_modules/vinho/vinho.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
 import { CartReducer } from './_modules/cart/cart.reducer';
-import { CartEffects } from "./_modules/cart/cart.effect";
-import {LayoutReducer} from "./_modules/layout/layout.reducer";
+import { CartEffects } from './_modules/cart/cart.effect';
+import { StoreVinhoEffect } from './_modules/storeVinho/storeVinho.effect';
+import {StoreVinhoReducer} from "./_modules/storeVinho/storeVinho.reducer";
 
 export interface VinhoState {
     id: string
@@ -22,26 +21,23 @@ export interface VinhoState {
 }
 
 export interface CartState {
-    productEdit: VinhoState
-    products: VinhoState[],
-    myProducts: VinhoState[],
-    total: number
+    items: VinhoState[],
+    totalPrice: number
 }
 
-export interface LayoutState {
-    showEdit: boolean
+export interface StoreVinhoState {
+    products: VinhoState[],
+    productEdit: VinhoState
 }
 
 export interface TryState {
     cart: CartState,
-    vinho: VinhoState,
-    layout: LayoutState
+    storeVinho: StoreVinhoState
 }
 
 export const reducers: ActionReducerMap<TryState> = {
     cart: CartReducer.reducer,
-    vinho: VinhoReducer.reducer,
-    layout: LayoutReducer.reducer
+    storeVinho: StoreVinhoReducer.reducer,
 };
 
 export const metaReducers: MetaReducer<TryState>[] = !environment.production ? [] : [];
@@ -55,7 +51,7 @@ const CONFIG_STORE_MODULE = {
 }
 
 const CONFIG_STORE_DEV_MODULE = { maxAge: 100, logOnly: environment.production }
-const CONFIG_EFFECTS_MODULE = [VinhoEffects, CartEffects]
+const CONFIG_EFFECTS_MODULE = [StoreVinhoEffect, CartEffects]
 
 @NgModule({
     imports: [

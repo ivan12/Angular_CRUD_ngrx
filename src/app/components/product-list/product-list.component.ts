@@ -4,8 +4,9 @@ import { Store } from '@ngrx/store';
 import { ToastController } from '@ionic/angular';
 import { CartState, VinhoState } from '../../_store/vinho-store.module';
 import { CartSelector } from '../../_store/_modules/cart/cart.selector';
-import { CartAction } from '../../_store/_modules/cart/cart.action';
-import { LayoutAction } from '../../_store/_modules/layout/layout.action';
+import {StoreVinhoAction} from "../../_store/_modules/storeVinho/storeVinho.action";
+import {StoreVinhoSelector} from "../../_store/_modules/storeVinho/storeVinho.selector";
+import {CartAction} from "../../_store/_modules/cart/cart.action";
 
 @Component({
   selector: 'app-product-list',
@@ -28,13 +29,15 @@ export class ProductListComponent implements OnInit {
   }
 
   loadVinhos() {
-    this.products$ = this.store.select(CartSelector.products);
-    this.myProducts$ = this.store.select(CartSelector.myProducts);
+    this.products$ = this.store.select(StoreVinhoSelector.products);
+    this.myProducts$ = this.store.select(CartSelector.items);
   }
 
   add(product, list) {
+    console.log('add() product = ', product);
+    console.log('add() list = ', list);
     if (list && (list.length > 0 && list.filter(elem => elem.id == product.id).length > 0)) {
-      this.store.dispatch(CartAction.addQuantidadeCarrinhoProduct({ payload: list, product: product }));
+      this.store.dispatch(CartAction.addQuantidadeCarrinhoProduct({ payload: list, index: list.indexOf(list.find(elem => elem.id == product.id)) }));
     } else {
       this.store.dispatch(CartAction.addVinhoMyProducts({payload: product}));
     }
@@ -42,12 +45,11 @@ export class ProductListComponent implements OnInit {
   }
 
   loadEdit(product) {
-    this.store.dispatch(LayoutAction.showHideEdit({payload: true}))
-    this.store.dispatch(CartAction.edit({payload: product}));
+    this.store.dispatch(StoreVinhoAction.edit({payload: product}));
   }
 
   setIndisponivel(product) {
-    this.store.dispatch(CartAction.desativarVinhoEffect({payload: product}));
+    this.store.dispatch(StoreVinhoAction.desativarVinhoEffect({payload: product}));
     this.toast('Vinho excluído com sucesso!');
   }
 
