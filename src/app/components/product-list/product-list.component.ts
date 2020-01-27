@@ -5,6 +5,7 @@ import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
 import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
 import {CartState, VinhoState} from "../../_store/vinho-store.module";
 import { Observable } from "rxjs";
+import { LayoutAction } from 'src/app/_store/_modules/layout/layout.action';
 
 @Component({
   selector: 'app-product-list',
@@ -34,6 +35,7 @@ export class ProductListComponent implements OnInit {
   }
 
   loadEdit(product) {
+    this.store.dispatch(LayoutAction.showHideEdit({payload: true}))
     this.store.dispatch(VinhosAction.edit({payload: product}));
   }
 
