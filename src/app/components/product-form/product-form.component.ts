@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { CartState, VinhoState } from '../../_store/vinho-store.module';
-import {StoreVinhoAction} from "../../_store/_modules/storeVinho/storeVinho.action";
-import {StoreVinhoSelector} from "../../_store/_modules/storeVinho/storeVinho.selector";
+import { StoreVinhoAction } from '../../_store/_modules/storeVinho/storeVinho.action';
+import { StoreVinhoSelector } from '../../_store/_modules/storeVinho/storeVinho.selector';
 
 @Component({
   selector: 'app-product-form',

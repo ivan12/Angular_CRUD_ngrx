@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { CartReducer } from './_modules/cart/cart.reducer';
 import { CartEffects } from './_modules/cart/cart.effect';
 import { StoreVinhoEffect } from './_modules/storeVinho/storeVinho.effect';
-import {StoreVinhoReducer} from "./_modules/storeVinho/storeVinho.reducer";
+import { StoreVinhoReducer } from './_modules/storeVinho/storeVinho.reducer';
 
 export interface VinhoState {
     id: string

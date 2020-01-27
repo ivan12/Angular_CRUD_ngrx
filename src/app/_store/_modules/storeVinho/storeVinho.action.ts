@@ -28,8 +28,6 @@ export namespace StoreVinhoAction {
 
     export const editVinhosEffect  = createAction(ActionTypes.EDIT_EFFECT, props<{ payload : any }>());
 
-    export const removeVinhosEffect  = createAction(ActionTypes.REMOVE_EFFECT, props<{ payload : any }>());
-
     export const desativarVinhoEffect  = createAction(ActionTypes.DESATIVAR_EFFECT, props<{ payload : any }>());
 
 }

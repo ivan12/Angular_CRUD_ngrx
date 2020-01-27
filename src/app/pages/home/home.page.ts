@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import { ToastController } from '@ionic/angular';
 import { CartSelector } from '../../_store/_modules/cart/cart.selector';
 import { CartAction } from '../../_store/_modules/cart/cart.action';
-import { StoreVinhoSelector } from "../../_store/_modules/storeVinho/storeVinho.selector";
-import {StoreVinhoAction} from "../../_store/_modules/storeVinho/storeVinho.action";
+import { StoreVinhoSelector } from '../../_store/_modules/storeVinho/storeVinho.selector';
 
 @Component({
   selector: 'app-home',
@@ -52,5 +51,4 @@ export class HomePage {
     });
     toast.present();
   }
-
 }

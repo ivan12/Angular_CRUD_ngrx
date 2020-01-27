@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { StoreVinhoState } from "../../vinho-store.module";
+import { StoreVinhoState } from '../../vinho-store.module';
 
 export const storeState = createFeatureSelector<StoreVinhoState>('storeVinho')
 

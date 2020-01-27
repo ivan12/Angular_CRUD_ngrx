@@ -1,7 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store'
 import { VinhoState } from '../../vinho-store.module';
-import {StoreVinhoAction} from "./storeVinho.action";
-import {CartAction} from "../cart/cart.action";
+import {StoreVinhoAction} from './storeVinho.action';
 
 export namespace StoreVinhoReducer {
     const storeVinho: {

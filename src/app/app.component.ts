@@ -1,9 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {StoreVinhoState, VinhoState} from "./_store/vinho-store.module";
-import {StoreVinhoAction} from "./_store/_modules/storeVinho/storeVinho.action";
-import {StoreVinhoSelector} from "./_store/_modules/storeVinho/storeVinho.selector";
+import { StoreVinhoState, VinhoState } from './_store/vinho-store.module';
+import { StoreVinhoAction } from './_store/_modules/storeVinho/storeVinho.action';
+import { StoreVinhoSelector } from './_store/_modules/storeVinho/storeVinho.selector';
 
 @Component({
   selector: 'app-root',

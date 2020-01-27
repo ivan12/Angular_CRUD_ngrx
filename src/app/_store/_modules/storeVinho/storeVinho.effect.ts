@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { CartAction } from '../cart/cart.action';
 import { StoreVinhoService } from './storeVinho.service';
-import {StoreVinhoAction} from "./storeVinho.action";
+import { StoreVinhoAction } from './storeVinho.action';
 
 @Injectable()
 export class StoreVinhoEffect {
