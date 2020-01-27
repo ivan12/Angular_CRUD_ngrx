@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { CartState, VinhoState } from '../../_store/vinho-store.module';
 import { CartAction } from '../../_store/_modules/cart/cart.action';
 import { CartSelector } from '../../_store/_modules/cart/cart.selector';
-import { LayoutSelector } from 'src/app/_store/_modules/layout/layout.selector';
 
 @Component({
   selector: 'app-product-form',
@@ -17,7 +16,6 @@ import { LayoutSelector } from 'src/app/_store/_modules/layout/layout.selector';
 export class ProductFormComponent implements OnInit {
   todoForm: FormGroup;
   productEdit$: Observable<VinhoState> = undefined;
-  showEdit$: Observable<boolean>;
 
   constructor(
     private store: Store<CartState>,
@@ -27,7 +25,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.showEdit$ = this.store.select(LayoutSelector.showEdit);
     this.productEdit$ = this.store.select(CartSelector.productEdit);
 
     this.productEdit$.pipe(
