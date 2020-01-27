@@ -1,10 +1,10 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
-import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
-import { CartState, VinhoState } from "../../_store/vinho-store.module";
-import { Observable } from "rxjs";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CartState, VinhoState } from '../../_store/vinho-store.module';
+import { CartSelector } from '../../_store/_modules/cart/cart.selector';
+import { CartAction } from '../../_store/_modules/cart/cart.action';
 
 @Component({
   selector: 'app-product-form',
@@ -19,12 +19,11 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private store: Store<CartState>,
     private formBuilder: FormBuilder,
-  ) {
-    this.inicializarForm();
-  }
+  ) { }
 
   async ngOnInit() {
-    this.productEdit$ = this.store.select(VinhoSelector.productEdit);
+    this.inicializarForm();
+    this.productEdit$ = this.store.select(CartSelector.productEdit);
   }
 
   inicializarForm() {
@@ -40,6 +39,11 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
+  async edit(productEdit) {
+    this.store.dispatch(CartAction.editVinhosEffect({payload: this.mountObjEditProduct(productEdit)}));
+    this.clearEdit();
+  }
+
   mountObjEditProduct(productEdit) {
     let objTemp = {
       descricao: this.todoForm.value.descricao,
@@ -49,17 +53,13 @@ export class ProductFormComponent implements OnInit {
       pais: productEdit.pais,
       preco: productEdit.preco,
       quantidade: productEdit.quantidade,
+      quantidadeCarrinho: productEdit.quantidadeCarrinho,
       safra: productEdit.safra,
     }
     return objTemp;
   }
 
-  async edit(productEdit) {
-    this.store.dispatch(VinhosAction.editVinhosEffect({payload: this.mountObjEditProduct(productEdit)}));
-    this.clearEdit();
-  }
-
   clearEdit() {
-    this.store.dispatch(VinhosAction.clearEdit({payload: null}));
+    this.store.dispatch(CartAction.clearEdit({payload: null}));
   }
 }

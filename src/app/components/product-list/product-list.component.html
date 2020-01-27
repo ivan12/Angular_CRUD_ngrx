@@ -7,7 +7,7 @@
 </div>
 
 <ion-grid *ngIf="(products$ | async)">
-  <ion-row class="col-8 col-md-7 col-lg-6" class="scroll-styles">
+  <ion-row class="col-8 col-md-7 col-lg-6" class="scroll-styles" *ngIf="(myProducts$ | async) as myProducts">
     <ion-col size="3" *ngFor="let product of (products$ | async)">
       <ion-card class="card-vinho">
         <ion-card-header>
@@ -25,7 +25,7 @@
           {{ product.descricao }}
         </ion-card-content>
 
-        <ion-item href="#" class="bg-color-green" (click)="add(product)">
+        <ion-item href="#" class="bg-color-green" (click)="add(product, myProducts)">
           <ion-icon name="cart" slot="start"></ion-icon>
           <ion-label>Adicionar</ion-label>
         </ion-item>

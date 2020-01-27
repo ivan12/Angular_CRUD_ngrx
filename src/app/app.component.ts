@@ -1,9 +1,9 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { VinhosAction } from "./_store/_modules/vinho/vinho.action";
-import { VinhoSelector } from "./_store/_modules/vinho/vinho.selector";
-import {CartState, VinhoState} from "./_store/vinho-store.module";
+import { CartState, VinhoState } from './_store/vinho-store.module';
+import { CartAction } from './_store/_modules/cart/cart.action';
+import { CartSelector } from './_store/_modules/cart/cart.selector';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(VinhosAction.loadVinhosEffect({payload: this.cart}));
-    this.listVinhos$ = this.store.select(VinhoSelector.myProducts);
+    this.store.dispatch(CartAction.loadVinhosEffect({payload: this.cart}));
+    this.listVinhos$ = this.store.select(CartSelector.myProducts);
+  }
+
+  countMyProducts(products) {
+    let countMyProducts = 0;
+    products.forEach(product => {
+      countMyProducts += product.quantidadeCarrinho;
+    });
+    return countMyProducts;
   }
 }

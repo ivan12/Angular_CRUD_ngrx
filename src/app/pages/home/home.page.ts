@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
-import {VinhosAction} from "../../_store/_modules/vinho/vinho.action";
-import {ToastController} from "@ionic/angular";
+import { ToastController } from '@ionic/angular';
+import { CartSelector } from '../../_store/_modules/cart/cart.selector';
+import { CartAction } from '../../_store/_modules/cart/cart.action';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +18,8 @@ export class HomePage {
       private store: Store<{ cart: [] }>,
       private toastCtrl: ToastController)
   {
-    this.total$ = store.select(VinhoSelector.total);
-    this.products$ = store.select(VinhoSelector.products);
+    this.total$ = store.select(CartSelector.total);
+    this.products$ = store.select(CartSelector.products);
   }
 
   showTotalProdutosLoja(products) {
@@ -35,8 +35,8 @@ export class HomePage {
   }
 
   comprar() {
-    this.store.dispatch(VinhosAction.removeAll({payload: null}));
-    this.store.dispatch(VinhosAction.clearTotal({payload: null}));
+    this.store.dispatch(CartAction.removeAll({payload: null}));
+    this.store.dispatch(CartAction.clearTotal({payload: null}));
     this.toast('Compra realizada com sucesso!');
   }
 

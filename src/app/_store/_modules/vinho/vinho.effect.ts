@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, Effect, ofType } from "@ngrx/effects";
-import {catchError, exhaustMap, map, switchMap} from "rxjs/operators";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { catchError, exhaustMap, map } from "rxjs/operators";
 import { VinhoService } from "./vinho.service";
-import { VinhosAction } from "./vinho.action";
+import { VinhoAction } from "./vinho.action";
+import { CartAction } from "../cart/cart.action";
 
 @Injectable()
 export class VinhoEffects {
@@ -11,43 +12,17 @@ export class VinhoEffects {
         private vinhoService: VinhoService,
     ) { }
 
-    getProductsEffect$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(VinhosAction.loadVinhosEffect),
-            map(action => action['payload']),
-            // catchError(error => error),
-            exhaustMap(res => this.vinhoService.getProducts()),
-            map(products => {
-                console.log('getProductsEffect$ products = ', products);
-                return VinhosAction.setVinhos({ payload: products})
-            })
-        ),
-    );
-
     edit$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VinhosAction.editVinhosEffect),
+            ofType(VinhoAction.editVinhoEffect),
             map(action => action['payload']),
             catchError(error => error),
             exhaustMap(product => this.vinhoService.edit(product)
                 .pipe(
                     map(product => {
-                        VinhosAction.edit({ payload: product})
-                        return VinhosAction.loadVinhosEffect({ payload: null})
+                        VinhoAction.setVinho({ payload: product})
+                        return CartAction.loadVinhosEffect({ payload: null})
                     })
-                )
-            )
-        )
-    );
-
-    add$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(VinhosAction.addVinhosEffect),
-            map(action => action['payload']),
-            catchError(error => error),
-            exhaustMap(product => this.vinhoService.create(product)
-                .pipe(
-                    map(product => VinhosAction.add({ payload: product}))
                 )
             )
         )
@@ -55,12 +30,12 @@ export class VinhoEffects {
 
     desativar$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(VinhosAction.desativarVinhoEffect),
+            ofType(VinhoAction.desativarVinhoEffect),
             map(action => action['payload']),
             catchError(error => error),
             exhaustMap(product => this.vinhoService.desativar(product)
                 .pipe(
-                    map(product => VinhosAction.loadVinhosEffect({ payload: null}))
+                    map(product => CartAction.loadVinhosEffect({ payload: null}))
                 )
             )
         )

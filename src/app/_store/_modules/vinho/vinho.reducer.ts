@@ -1,38 +1,24 @@
 import { createReducer, on, Action } from '@ngrx/store'
-import { VinhosAction } from './vinho.action';
+import { VinhoAction } from './vinho.action';
+import { VinhoState} from '../../vinho-store.module';
 
 export namespace VinhoReducer {
-    const cart: { total: number; productEdit: {}; products: any[], myProducts: any[] } = {
-        productEdit: undefined,
-        products: [],
-        myProducts: [],
-        total: 0
+    const vinho: {
+        descricao: string, fotos: [], id: string, nome: string, pais: string, preco: number, quantidade: string,
+        quantidadeCarrinho: number, safra: string;
+    } = {
+        descricao: '', fotos: [], id:  '', nome: '', pais: '', preco: 0, quantidade: '', quantidadeCarrinho: 0, safra: ''
     }
 
-    const _setPro = (state: any, action: Action) => ({ ...state, products: action['payload']})
-    const _addVinhoMyProducts = (state: any, action: Action) => ({ ...state, myProducts: state.myProducts.concat({...action['payload']}) })
-    const _setEdit = (state: any, action: Action) => ({ ...state, productEdit: action['payload'] })
-    const _setRemove = (state: any, action: Action) => ({ ...state, myProducts: state.myProducts.filter(myProduct => myProduct != action['payload'])})
-    const _setRemoveAll = (state: any, action: Action) => ({ ...state, myProducts: []})
+    const _addQuantidadeVinho = (state: VinhoState, action: Action) => ({ ...state,  quantidadeCarrinho: (state.quantidadeCarrinho + 1)});
+    const _decrementQuantidadeVinho = (state: VinhoState, action: Action) => ({ ...state,  quantidadeCarrinho: (state.quantidadeCarrinho - 1)});
 
-    const _setAddtotal = (state: any, action: Action) => ({ ...state, total: (state.total + action['payload'])})
-    const _setReduceTotal = (state: any, action: Action) => ({ ...state,  total: (state.total - action['payload'])})
-    const _setClearTotal = (state: any, action: Action) => ({ ...state,  total: 0 })
+    const _setVinho = (state: any, action: any) => ({ ...state, vinho: action['payload']});
 
-    const _clearEdit = (state: any, action: Action) => ({ ...state, productEdit: undefined })
-
-    const _vinhoReduces = createReducer(cart,
-        on(VinhosAction.setVinhos, _setPro),
-        on(VinhosAction.edit, _setEdit),
-        on(VinhosAction.remove, _setRemove),
-        on(VinhosAction.removeAll, _setRemoveAll),
-        on(VinhosAction.addVinhoMyProducts, _addVinhoMyProducts),
-
-        on(VinhosAction.addTotal, _setAddtotal),
-        on(VinhosAction.reduceTotal, _setReduceTotal),
-        on(VinhosAction.clearTotal, _setClearTotal),
-
-        on(VinhosAction.clearEdit, _clearEdit),
+    const _vinhoReduces = createReducer(vinho,
+        on(VinhoAction.addQuantidadeVinho, _addQuantidadeVinho),
+        on(VinhoAction.decrementQuantidadeVinho, _decrementQuantidadeVinho),
+        on(VinhoAction.setVinho, _setVinho),
     )
     export function reducer(state: any, action: Action) {
         return _vinhoReduces(state, action)

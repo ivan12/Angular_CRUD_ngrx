@@ -27,3 +27,15 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #737373 !important;
 }
+
+.badge-custom {
+  margin-left: 10px;
+  font-size: 14px;
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.badge-disable {
+  background-color: #a0a0a0ad;
+}

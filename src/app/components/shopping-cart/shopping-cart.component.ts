@@ -1,10 +1,10 @@
-import { Component, Injectable, OnInit} from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AlertController, ToastController } from '@ionic/angular';
-import { VinhosAction } from "../../_store/_modules/vinho/vinho.action";
-import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
-import { CartState } from "../../_store/vinho-store.module";
+import { AlertController } from '@ionic/angular';
+import { CartState, VinhoState } from '../../_store/vinho-store.module';
+import { CartSelector } from '../../_store/_modules/cart/cart.selector';
+import { CartAction } from '../../_store/_modules/cart/cart.action';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,38 +12,36 @@ import { CartState } from "../../_store/vinho-store.module";
   styleUrls: ['./shopping-cart.component.scss'],
 })
 @Injectable()
-export class ShoppingCartComponent implements OnInit {
-  cart$: Observable<CartState>;
+export class ShoppingCartComponent {
+  myProducts$: Observable<VinhoState[]>;
 
   constructor(
     private store: Store<CartState>,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController
   ) {
-    this.cart$ = store.select(VinhoSelector.cart);
+    this.myProducts$ = store.select(CartSelector.myProducts);
   }
 
   remove(myProduct) {
-    this.store.dispatch(VinhosAction.remove({payload: myProduct}));
-    this.store.dispatch(VinhosAction.reduceTotal({payload: myProduct.preco}));
+    this.store.dispatch(CartAction.remove({payload: myProduct}));
+    this.store.dispatch(CartAction.reduceTotal({payload: myProduct.preco * myProduct.quantidadeCarrinho}));
+  }
+
+  addQuantidadeCarrinho(list, product) {
+     this.store.dispatch(CartAction.addQuantidadeCarrinhoProduct({ payload: list, product: product }));
+    this.store.dispatch(CartAction.addTotal({payload: product.preco}));
+  }
+
+  reduceQuantidadeCarrinho(list, product) {
+    if (product.quantidadeCarrinho > 1) {
+      this.store.dispatch(CartAction.reduceQuantidadeCarrinhoProduct({ payload: list, product: product }));
+      this.store.dispatch(CartAction.reduceTotal({payload: product.preco}));
+    }
   }
 
   reset() {
-    this.store.dispatch(VinhosAction.removeAll({payload: null}));
-    this.store.dispatch(VinhosAction.clearTotal({payload: null}));
-  }
-
-  ngOnInit() {
-  }
-
-  async toast(msg) {
-    const toast = await this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      showCloseButton: true,
-      closeButtonText: "Fechar"
-    });
-    toast.present();
+    this.store.dispatch(CartAction.removeAll({payload: null}));
+    this.store.dispatch(CartAction.clearTotal({payload: null}));
   }
 
   async presentRemoveConfirm(item) {

@@ -1,9 +1,8 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import { Component, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { map } from "rxjs/operators";
-import { VinhoSelector } from "../../_store/_modules/vinho/vinho.selector";
-import {CartState, VinhoState} from "../../_store/vinho-store.module";
-import {Observable} from "rxjs";
+import { CartState, VinhoState } from '../../_store/vinho-store.module';
+import { CartSelector } from '../../_store/_modules/cart/cart.selector';
 
 @Component({
   selector: 'app-navbar',
@@ -11,14 +10,19 @@ import {Observable} from "rxjs";
   styleUrls: ['./navbar.component.scss'],
 })
 @Injectable()
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   myProducts$: Observable<VinhoState[]> = undefined;
 
   constructor(private store: Store<CartState>) {
-    this.myProducts$ = store.select(VinhoSelector.myProducts);
+    this.myProducts$ = store.select(CartSelector.myProducts);
   }
 
-  ngOnInit() {
+  countMyProducts(products) {
+    let countMyProducts = 0;
+    products.forEach(product => {
+      countMyProducts += product.quantidadeCarrinho;
+    });
+    return countMyProducts;
   }
 
 }

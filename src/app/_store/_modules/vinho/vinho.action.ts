@@ -1,58 +1,23 @@
 import {createAction, props} from '@ngrx/store';
 
-export namespace VinhosAction {
+export namespace VinhoAction {
     export enum ActionTypes {
-        ADD                   = 'ADD',
-        ADD_VINHO_MY_PRODUCTS = 'ADD_VINHO_MY_PRODUCTS',
-        EDIT                  = 'EDIT',
-        SET_VINHOS            = 'SET_VINHOS',
-        ADD_TOTAL             = 'ADD_TOTAL',
-        REDUCE_TOTAL          = 'REDUCE_TOTAL',
-        CLEAR_TOTAL           = 'CLEAR_TOTAL',
-        REMOVE                = 'REM',
-        REMOVE_ALL            = 'REMOVE_ALL',
-        CLEAR_EDIT            = 'CLEAR_EDIT',
+        ADD_QUANTIDADE_VINHO        = 'ADD_QUANTIDADE_VINHO',
+        DECREMENT_QUANTIDADE_VINHO  = 'DECREMENT_QUANTIDADE_VINHO',
+        SET_VINHO                  = 'SET_VINHO',
 
-        LOAD_VINHOS_EFFECT    = 'GET_VINHOS_EFFECT',
-        ADD_EFFECT            = 'ADD_EFFECT',
-        EDIT_EFFECT           = 'EDIT_EFFECT',
-        REMOVE_EFFECT         = 'REM_EFFECT',
-        DESATIVAR_EFFECT      = 'DESATIVAR_EFFECT'
+        EDIT_VINHO_EFFECT           = 'EDIT_VINHO_EFFECT',
+        DESATIVAR_VINHO_EFFECT      = 'DESATIVAR_VINHO_EFFECT',
     }
 
-    // Todo Actions Reduce
+    export const editVinhoEffect  = createAction(ActionTypes.EDIT_VINHO_EFFECT, props<{ payload : any }>());
 
-    export const add  = createAction(ActionTypes.ADD, props<{ payload : any }>());
+    export const setVinho  = createAction(ActionTypes.SET_VINHO, props<{ payload : any }>());
 
-    export const edit  = createAction(ActionTypes.EDIT, props<{ payload : any }>());
+    export const addQuantidadeVinho  = createAction(ActionTypes.ADD_QUANTIDADE_VINHO, props<{ payload : any }>());
 
-    export const setVinhos  = createAction(ActionTypes.SET_VINHOS, props<{ payload : any }>());
+    export const decrementQuantidadeVinho  = createAction(ActionTypes.DECREMENT_QUANTIDADE_VINHO, props<{ payload : any }>());
 
-    export const remove  = createAction(ActionTypes.REMOVE, props<{ payload : any }>());
-
-    export const removeAll  = createAction(ActionTypes.REMOVE_ALL, props<{ payload : any }>());
-
-
-    export const addTotal  = createAction(ActionTypes.ADD_TOTAL, props<{ payload : any }>());
-
-    export const reduceTotal  = createAction(ActionTypes.REDUCE_TOTAL, props<{ payload : any }>());
-
-    export const clearTotal  = createAction(ActionTypes.CLEAR_TOTAL, props<{ payload : any }>());
-
-    export const clearEdit  = createAction(ActionTypes.CLEAR_EDIT, props<{ payload : any }>());
-
-    // Todo Actions Effect
-
-    export const loadVinhosEffect  = createAction(ActionTypes.LOAD_VINHOS_EFFECT, props<{ payload : any }>());
-
-    export const addVinhosEffect  = createAction(ActionTypes.ADD_EFFECT, props<{ payload : any }>());
-
-    export const editVinhosEffect  = createAction(ActionTypes.EDIT_EFFECT, props<{ payload : any }>());
-
-    export const removeVinhosEffect  = createAction(ActionTypes.REMOVE_EFFECT, props<{ payload : any }>());
-
-    export const addVinhoMyProducts  = createAction(ActionTypes.ADD_VINHO_MY_PRODUCTS, props<{ payload : any }>());
-
-    export const desativarVinhoEffect  = createAction(ActionTypes.DESATIVAR_EFFECT, props<{ payload : any }>());
+    export const desativarVinhoEffect  = createAction(ActionTypes.DESATIVAR_VINHO_EFFECT, props<{ payload : any }>());
 
 }

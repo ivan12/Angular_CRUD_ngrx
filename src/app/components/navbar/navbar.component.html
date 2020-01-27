@@ -9,7 +9,7 @@
         <ion-buttons slot="end">
             <ion-button>
                 <ion-icon slot="start" name="cart"></ion-icon>
-                <ion-badge color="danger">{{ (myProducts$ | async).length }}</ion-badge>
+                <ion-badge color="danger" *ngIf="(myProducts$ | async) as myProducts">{{ countMyProducts(myProducts) }}</ion-badge>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
