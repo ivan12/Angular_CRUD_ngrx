@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { CartState, VinhoState } from '../../_store/vinho-store.module';
 import { CartSelector } from '../../_store/_modules/cart/cart.selector';
 import { CartAction } from '../../_store/_modules/cart/cart.action';
+import { LayoutAction } from '../../_store/_modules/layout/layout.action';
 
 @Component({
   selector: 'app-product-list',
@@ -41,6 +42,7 @@ export class ProductListComponent implements OnInit {
   }
 
   loadEdit(product) {
+    this.store.dispatch(LayoutAction.showHideEdit({payload: true}))
     this.store.dispatch(CartAction.edit({payload: product}));
   }
 

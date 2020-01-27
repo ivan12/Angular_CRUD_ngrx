@@ -7,6 +7,7 @@ import { VinhoEffects } from './_modules/vinho/vinho.effect';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CartReducer } from './_modules/cart/cart.reducer';
 import { CartEffects } from "./_modules/cart/cart.effect";
+import {LayoutReducer} from "./_modules/layout/layout.reducer";
 
 export interface VinhoState {
     id: string
@@ -27,14 +28,20 @@ export interface CartState {
     total: number
 }
 
+export interface LayoutState {
+    showEdit: boolean
+}
+
 export interface TryState {
     cart: CartState,
     vinho: VinhoState,
+    layout: LayoutState
 }
 
 export const reducers: ActionReducerMap<TryState> = {
     cart: CartReducer.reducer,
-    vinho: VinhoReducer.reducer
+    vinho: VinhoReducer.reducer,
+    layout: LayoutReducer.reducer
 };
 
 export const metaReducers: MetaReducer<TryState>[] = !environment.production ? [] : [];
