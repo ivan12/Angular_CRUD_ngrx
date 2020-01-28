@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { StoreVinhoState, VinhoState } from './_store/vinho-store.module';
 import { StoreVinhoAction } from './_store/_modules/storeVinho/storeVinho.action';
-import { StoreVinhoSelector } from './_store/_modules/storeVinho/storeVinho.selector';
+import {CartSelector} from "./_store/_modules/cart/cart.selector";
 
 @Component({
   selector: 'app-root',
@@ -19,13 +19,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(StoreVinhoAction.loadVinhosEffect({payload: this.storeVinho}));
-    this.listVinhos$ = this.store.select(StoreVinhoSelector.products);
+    this.listVinhos$ = this.store.select(CartSelector.items);
   }
 
   countMyProducts(products) {
     let countMyProducts = 0;
     products.forEach(product => {
-      countMyProducts += product.quantidadeCarrinho;
+      countMyProducts += Number(product.quantidadeCarrinho);
     });
     return countMyProducts;
   }
