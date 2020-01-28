@@ -3,11 +3,11 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="8">
+      <ion-col size-lg="9" size-sm="12">
         <app-product-list></app-product-list>
         <app-product-form></app-product-form>
       </ion-col>
-      <ion-col size="4">
+      <ion-col size-lg="3" class="ion-hide-down">
         <app-shopping-cart></app-shopping-cart>
       </ion-col>
     </ion-row>
@@ -17,12 +17,14 @@
 <ion-footer class="footer">
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <span style="color: #a2a2a2">Vinhos na Loja:</span>
-      <ion-title>{{ showTotalProdutosLoja((products$ | async)) }}</ion-title>
-      <ion-button color="danger" fill="solid" (click)="createProductAction()">CRIAR NOVO PRODUTO NA LOJA</ion-button>
+      <span style="color: #a2a2a2" class="ion-hide-down">Vinhos na Loja:</span>
+      <ion-title class="ion-hide-down">{{ showTotalProdutosLoja((products$ | async)) }}</ion-title>
+      <ion-button color="danger" class="ion-hide-down" fill="solid" (click)="createProductAction()">CRIAR NOVO PRODUTO NA LOJA</ion-button>
+      <ion-button color="danger" class="ion-hide-lg-up" fill="solid" (click)="createProductAction()">CRIAR NOVO</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-title><span style="color: #a2a2a2">Total do Carrinho:</span> {{ ((total$ | async) ? (total$ | async) : 0) | currency: 'BRL' }}</ion-title>
+      <ion-text class="ion-hide-md-up ion-margin-end"><span style="color: #a2a2a2;">Total:</span> {{ ((total$ | async) ? (total$ | async) : 0) | currency: 'BRL' }}</ion-text>
+      <ion-title class="ion-hide-down"><span style="color: #a2a2a2">Total do Carrinho:</span> {{ ((total$ | async) ? (total$ | async) : 0) | currency: 'BRL' }}</ion-title>
       <ion-button color="success" fill="solid" [disabled]="((total$ | async) ? (total$ | async) : 0 ) <= 0" (click)="comprar()">COMPRAR</ion-button>
     </ion-buttons>
   </ion-toolbar>

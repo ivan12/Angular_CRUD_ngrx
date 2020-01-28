@@ -8,8 +8,8 @@
           <ion-note slot="end" color="danger"*ngIf="(listVinhos$ | async) as myProducts">{{ countMyProducts(myProducts) }}</ion-note>
         </ion-item>
       </ion-list>
+      <app-shopping-cart></app-shopping-cart>
     </ion-content>
   </ion-menu>
-
   <ion-router-outlet main></ion-router-outlet>
 </ion-app>

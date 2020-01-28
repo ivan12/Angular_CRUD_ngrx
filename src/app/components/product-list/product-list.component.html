@@ -7,8 +7,8 @@
 </div>
 
 <ion-grid *ngIf="(products$ | async)">
-  <ion-row class="col-8 col-md-7 col-lg-6" class="scroll-styles" *ngIf="(myProducts$ | async) as myProducts">
-    <ion-col size="3" *ngFor="let product of (products$ | async)">
+  <ion-row class="col-8 col-md-7 col-lg-6 scroll-styles" *ngIf="(myProducts$ | async) as myProducts">
+    <ion-col size-lg="3" size-sm="12" size-xs="12" *ngFor="let product of (products$ | async)">
       <ion-card class="card-vinho">
         <ion-card-header>
           <ion-item href="#" class="bg-color-red eye-disable" (click)="setIndisponivel(product)">
