@@ -13,8 +13,8 @@ export namespace CartReducer {
     const _setRemove = (state: any, action: Action) => ({ ...state, items: state.items.filter(myProduct => myProduct != action['payload'])});
     const _setRemoveAll = (state: any, action: Action) => ({ ...state, items: []});
 
-    const _setAddtotal = (state: any, action: Action) => ({ ...state, totalPrice: (state.totalPrice + action['payload'])});
-    const _setReduceTotal = (state: any, action: Action) => ({ ...state,  totalPrice: (state.totalPrice - action['payload'])});
+    const _setAddtotal = (state: any, action: Action) => ({ ...state, totalPrice: (state.totalPrice + Number(action['payload']))});
+    const _setReduceTotal = (state: any, action: Action) => ({ ...state,  totalPrice: (state.totalPrice - Number(action['payload']))});
 
     const _setClearTotal = (state: any, action: Action) => ({ ...state,  totalPrice: 0 });
 
