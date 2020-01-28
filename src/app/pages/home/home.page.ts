@@ -5,6 +5,8 @@ import { ToastController } from '@ionic/angular';
 import { CartSelector } from '../../_store/_modules/cart/cart.selector';
 import { CartAction } from '../../_store/_modules/cart/cart.action';
 import { StoreVinhoSelector } from '../../_store/_modules/storeVinho/storeVinho.selector';
+import {StoreVinhoAction} from "../../_store/_modules/storeVinho/storeVinho.action";
+import {VinhoState} from "../../_store/vinho-store.module";
 
 @Component({
   selector: 'app-home',
@@ -33,6 +35,22 @@ export class HomePage {
     } else {
       return 0;
     }
+  }
+
+  createProductAction() {
+    let vinhoDefault = {
+      nome: 'Vinho Default',
+      descricao: 'descricao Default',
+      fotos: undefined,
+      id: undefined,
+      pais: 'Brasil',
+      preco: 50,
+      quantidade: '1',
+      quantidadeCarrinho: 1,
+      safra: '1989'
+    }
+    this.store.dispatch(StoreVinhoAction.addVinhosEffect({payload: vinhoDefault}));
+    this.toast('Produto criado com sucesso!');
   }
 
   comprar() {

@@ -47,7 +47,10 @@ export class StoreVinhoEffect {
             catchError(error => error),
             exhaustMap(product => this.productsService.create(product)
                 .pipe(
-                    map(product => CartAction.add({ payload: product}))
+                    map(product => {
+                        CartAction.add({ payload: product});
+                        return StoreVinhoAction.loadVinhosEffect({ payload: null});
+                    })
                 )
             )
         )
